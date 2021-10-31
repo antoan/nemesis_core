@@ -76,6 +76,10 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
   <xacro:property name="wheel_length" value="0.05" />
   <xacro:property name="wheel_radius" value="0.0525" />
 
+  <xacro:property name="t256_to_Base_x" value="-${1/2*(chassis_length - foundation_length) + foundation_length}" />
+  <xacro:property name="t256_to_Base_y" value="${1/2*chassis_length - 1/2*(chassis_length - foundation_length)}" />
+  <xacro:property name="t256_to_Base_z" value="-${chassis_height + 0.002 + foundation_height + 0.002}" />
+
   <!-- Base link is the center of the robot's bottom plate -->
   <link name="base_link">
     <visual>
@@ -151,6 +155,22 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
     <parent link="foundation_link" />
     <child link="chassis_link" />
     </joint>
+
+  <!--  <link name="t265_pose_frame"/> -->
+  <!--  <link name="d435i_link"/> -->
+
+  <!--   <joint name="t265_to_base" type="fixed"> -->
+  <!--   <parent link="t265_pose_frame"/> -->
+  <!--   <child link="base_link"/> -->
+  <!--   <origin xyz="${t256_to_Base_x} ${t256_to_Base_y} ${t256_to_Base_z}" rpy="0 0 0"/> -->
+  <!--   </joint> -->
+    
+  <!-- <joint name="t265_to_d435i" type="fixed"> -->
+  <!--   <parent link="t265_pose_frame"/> -->
+  <!--   <child link="d435i_link"/> -->
+  <!--   <origin xyz="0.009 0.021 0.027" rpy="0.000 -0.018 0.005"/> -->
+  <!-- </joint> -->
+  
   <!-- Base footprint is on the ground under the robot -->
   <link name="base_footprint"/>
 
