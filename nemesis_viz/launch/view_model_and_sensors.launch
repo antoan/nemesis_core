@@ -10,4 +10,8 @@
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find nemesis_viz)/rviz/model.rviz" />
 
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+  <include file="$(find nemesis_description)/launch/rs_t265_and_d435i.launch">
+  </include>
+
 </launch>
