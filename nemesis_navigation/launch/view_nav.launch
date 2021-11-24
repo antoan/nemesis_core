@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<launch>
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find nemesis_navigation)/rviz/nemesis_navigation.rviz" />
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+  <!-- Construct and voxelize the point cloud (for fast visualization in rviz) -->
+  <node pkg="nodelet" type="nodelet" name="points_xyzrgb" args="standalone rtabmap_ros/point_cloud_xyzrgb">
+    <remap from="rgbd_image"      to="/rtabmap/rgbd_image/compressed"/>
+    <remap from="cloud"           to="voxel_cloud" />
+
+    <param name="queue_size" type="int" value="10"/>
+    <param name="voxel_size" type="double" value="0.01"/>
+  </node>
+
+   <!-- TODO FIX INPUTS visualization with rtabmapviz -->
+    <node if="$(arg rtabmapviz)" pkg="rtabmap_ros" type="rtabmapviz" name="rtabmapviz" ns="rtabmap" args="-d $(find rtabmap_ros)/launch/config/rgbd_gui.ini" output="screen">
+      <param name="subscribe_scan"   type="bool"   value="true"/>
+      <param name="subscribe_odom"   type="bool"   value="true"/>
+      <param name="frame_id"         type="string" value="base_footprint"/>
+      <param name="approx_sync"      type="bool"   value="true"/>
+
+      <remap from="odom"            to="/odom"/>
+      <remap from="scan"            to="/scan"/>
+    </node>
+
+</launch>
