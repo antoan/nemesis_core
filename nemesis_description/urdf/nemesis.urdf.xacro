@@ -74,7 +74,7 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 
   <!-- Wheel Properties -->
   <xacro:property name="wheel_length" value="0.05" />
-  <xacro:property name="wheel_radius" value="0.0525" />
+  <xacro:property name="wheel_radius" value="0.0515" />
 
   <xacro:property name="t256_to_Base_x" value="-${1/2*(chassis_length - foundation_length) + foundation_length}" />
   <xacro:property name="t256_to_Base_y" value="${1/2*chassis_length - 1/2*(chassis_length - foundation_length)}" />
