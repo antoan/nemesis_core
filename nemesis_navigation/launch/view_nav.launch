@@ -3,7 +3,7 @@
 
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find nemesis_navigation)/rviz/nemesis_navigation.rviz" />
 
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  <!-- <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" /> -->
 
   <!-- Construct and voxelize the point cloud (for fast visualization in rviz) -->
   <node pkg="nodelet" type="nodelet" name="points_xyzrgb" args="standalone rtabmap_ros/point_cloud_xyzrgb">
