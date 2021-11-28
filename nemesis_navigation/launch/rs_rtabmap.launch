@@ -11,7 +11,7 @@
     <arg name="use_rtabmapviz"            default="false"/>
     
 
-    <include file="$(find nemesis_description)/launch/rs_t265_and_d435i.launch">
+    <include file="$(find nemesis_navigation)/launch/rs_t265_and_d435i.launch">
             <arg name="device_type_camera1"             value="$(arg device_type_camera1)"/>
             <arg name="device_type_camera2"             value="$(arg device_type_camera2)"/>
             <arg name="serial_no_camera1"               value="$(arg serial_no_camera1)"/>

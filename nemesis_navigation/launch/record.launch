@@ -5,6 +5,7 @@
 
 <node name="bag_record" pkg="rosbag" type="record"
         args="record --tcpnodelay -o $(arg bags_prefix) /rosout /rosout_agg
+/status
 /t265/odom/sample
 /d435i/aligned_depth_to_color/image_raw/compressed
 /d435i/color/image_raw/compressed

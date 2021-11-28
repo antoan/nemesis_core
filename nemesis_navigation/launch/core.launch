@@ -1,6 +1,0 @@
-<launch>
-    
-    <include file="$(find nemesis_description)/launch/description.launch"/>
-    <include file="$(find nemesis_description)/launch/rs_rtabmap.launch"/>
- 
-</launch>
