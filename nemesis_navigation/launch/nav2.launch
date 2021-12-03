@@ -1,0 +1,137 @@
+<launch>
+     <arg name="device_type_camera1"    		default="t265"/>
+    <arg name="device_type_camera2"    		default="d4.5"/>	<!-- Note: using regular expression. match D435, D435i, D415... -->
+    <arg name="serial_no_camera1"    			default=""/>
+    <arg name="serial_no_camera2"    			default=""/>
+    <arg name="camera1"              			default="t265"/>		<!-- Note: Replace with camera name -->
+    <arg name="camera2"              			default="d435i"/>		<!-- Note: Replace with camera name -->
+    <arg name="clip_distance"             default="-2"/>
+    <arg name="use_rviz"                  default="false"/>
+    <arg name="use_rtabmapviz"            default="false"/>
+
+    <!-- Localization-only mode -->
+  <arg name="localization"      default="false"/>
+  <arg     if="$(arg localization)" name="rtabmap_args"  default=""/>
+  <arg unless="$(arg localization)" name="rtabmap_args"  default="--delete_db_on_start"/>
+
+
+
+
+    <include file="$(find nemesis_description)/launch/description.launch"/>
+
+     <include file="$(find nemesis_navigation)/launch/rs_t265_and_d435i.launch">
+            <arg name="device_type_camera1"             value="$(arg device_type_camera1)"/>
+            <arg name="device_type_camera2"             value="$(arg device_type_camera2)"/>
+            <arg name="serial_no_camera1"               value="$(arg serial_no_camera1)"/>
+            <arg name="serial_no_camera2"               value="$(arg serial_no_camera2)"/>
+            <arg name="camera1"                         value="$(arg camera1)"/>
+            <arg name="camera2"                         value="$(arg camera2)"/>
+            <arg name="clip_distance"                   value="$(arg clip_distance)"/>
+
+    </include>
+
+<!-- SLAM (robot side) -->
+  <group ns="rtabmap">
+    <node name="rtabmap" pkg="rtabmap_ros" type="rtabmap" output="screen" args="$(arg rtabmap_args)">
+      <param name="frame_id"            type="string" value="base_footprint"/>
+      <param name="subscribe_scan"      type="bool" value="false"/>
+      <param name="use_action_for_goal" type="bool" value="true"/>
+      <param name="cloud_decimation"    type="int" value="1"/>     <!-- we already decimate in memory below -->
+      <param name="grid_eroded"         type="bool" value="true"/>
+      <param name="grid_cell_size"      type="double" value="0.05"/>
+
+      <param name="rgbd_sync"          value="true"/>
+      <param name="approx_rgbd_sync"   value="false"/>
+      <param name="queue_size"         value="200"/>
+      <remap from="odom"    to="/$(arg camera1)/odom/sample"/>
+
+      <remap from="mapData" to="mapData"/>
+
+      <remap from="rgb/image"       to="/$(arg camera2)/color/image_raw"/>
+      <remap from="depth/image"     to="/$(arg camera2)/aligned_depth_to_color/image_raw"/>
+      <remap from="rgb/camera_info" to="/$(arg camera2)/color/camera_info"/>
+
+      <remap from="goal_out"  to="current_goal"/>
+      <remap from="move_base" to="/planner/move_base"/>
+      <remap from="grid_map"  to="/map"/>
+
+      <!-- RTAB-Map's parameters -->
+      <param name="RGBD/NeighborLinkRefining" type="string" value="true"/>
+      <param name="RGBD/ProximityBySpace"     type="string" value="true"/>
+
+      <param name="Reg/Strategy" type="string" value="1"/>
+
+      <param name="RGBD/AngularUpdate" type="string" value="0.1"/>
+      <param name="RGBD/LinearUpdate"  type="string" value="0.1"/>
+      <param name="RGBD/LocalRadius"   type="string" value="5"/>
+
+      <param name="Mem/RehearsalSimilarity" type="string" value="0.45"/>
+      <param name="Mem/NotLinkedNodesKept"  type="string" value="false"/>
+      <param name="Mem/ImagePostDecimation"     type="string" value="4"/>
+
+      <param name="Rtabmap/StartNewMapOnLoopClosure" type="string" value="false"/>
+      <param name="Rtabmap/TimeThr"                  type="string" value="600"/>
+      <param name="Rtabmap/DetectionRate"            type="string" value="1"/>
+
+      <param name="Bayes/PredictionLC" type="string" value="0.1 0.36 0.30 0.16 0.062 0.0151 0.00255 0.00035"/>
+
+      <param name="Optimizer/Slam2D"          type="string" value="true"/>
+      <param name="RGBD/OptimizeFromGraphEnd" type="string" value="true"/>
+      <param name="Optimizer/Strategy"        type="string" value="0"/>
+
+      <param name="Kp/DetectorStrategy"   type="string" value="0"/>
+      <param name="Kp/MaxFeatures"        type="string" value="200"/>
+      <param name="SURF/HessianThreshold" type="string" value="500"/>
+
+      <param name="Reg/Force3DoF"  type="string" value="true"/>
+      <param name="Vis/MaxDepth"   type="string" value="5"/>
+      <param name="Vis/MinInliers" type="string" value="5"/>
+      <param name="Icp/CorrespondenceRatio" type="string" value="0.3"/>
+
+      <!-- localization mode -->
+      <param     if="$(arg localization)" name="Mem/IncrementalMemory" type="string" value="false"/>
+      <param unless="$(arg localization)" name="Mem/IncrementalMemory" type="string" value="true"/>
+      <param name="Mem/InitWMWithAllNodes" type="string" value="$(arg localization)"/>
+    </node>
+  </group>
+
+ <!-- ROS navigation stack move_base -->
+  <group ns="planner">
+
+     <remap from="obstacles_cloud" to="/obstacles_cloud"/>
+     <remap from="ground_cloud" to="/ground_cloud"/>
+     <remap from="map" to="/map"/>
+     <remap from="move_base_simple/goal" to="/planner_goal"/>
+     <node pkg="move_base" type="move_base" respawn="true" name="move_base" output="screen">
+        <param name="base_global_planner" value="navfn/NavfnROS"/>
+    	<rosparam file="$(find nemesis_navigation)/config/costmap_common.yaml" command="load" ns="global_costmap"/>
+     	<rosparam file="$(find nemesis_navigation)/config/costmap_common.yaml" command="load" ns="local_costmap" />
+    	<rosparam file="$(find nemesis_navigation)/config/costmap_local.yaml" command="load" ns="local_costmap" />
+    	<rosparam file="$(find nemesis_navigation)/config/costmap_global.yaml" command="load" ns="global_costmap"/>
+    	<rosparam file="$(find nemesis_navigation)/config/planner.yaml" command="load" />
+     </node>
+
+  </group>
+
+<!-- for the planner -->
+    <node pkg="nodelet" type="nodelet" name="points_xyz_planner" args="load rtabmap_ros/point_cloud_xyz camera_nodelet_manager">
+      <remap from="depth/image"            to="data_resized_image_depth"/>
+      <remap from="depth/camera_info"      to="data_resized_camera_info"/>
+      <remap from="cloud"                  to="cloudXYZ" />
+      <param name="decimation" type="int" value="1"/>                     <!-- already decimated above -->
+      <param name="max_depth"  type="double" value="3.0"/>
+      <param name="voxel_size" type="double" value="0.02"/>
+    </node>
+
+    <node pkg="nodelet" type="nodelet" name="obstacles_detection" args="load rtabmap_ros/obstacles_detection camera_nodelet_manager">
+      <remap from="cloud" to="cloudXYZ"/>
+      <remap from="obstacles" to="/obstacles_cloud"/>
+      <remap from="ground"    to="/ground_cloud"/>
+
+      <param name="frame_id"             type="string" value="base_footprint"/>
+      <param name="map_frame_id"         type="string" value="map"/>
+      <param name="wait_for_transform"   type="bool" value="true"/>
+      <param name="min_cluster_size"     type="int" value="20"/>
+      <param name="max_obstacles_height" type="double" value="0.4"/>
+    </node>
+</launch>
