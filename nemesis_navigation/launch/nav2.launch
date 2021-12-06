@@ -77,7 +77,7 @@
 
       <param name="Optimizer/Slam2D"          type="string" value="true"/>
       <param name="RGBD/OptimizeFromGraphEnd" type="string" value="true"/>
-      <param name="Optimizer/Strategy"        type="string" value="0"/>
+      <param name="Optimizer/Strategy"        type="string" value="2"/>
 
       <param name="Kp/DetectorStrategy"   type="string" value="0"/>
       <param name="Kp/MaxFeatures"        type="string" value="200"/>
