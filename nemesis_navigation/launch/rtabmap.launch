@@ -392,7 +392,11 @@
 
       <!-- use actionlib to send goals to move_base -->
       <param name="use_action_for_goal" type="bool" value="true"/>
-      <remap from="move_base"            to="/move_base"/>
+
+      <remap from="goal_out"  to="current_goal"/>
+      <remap from="move_base" to="/planner/move_base"/>
+      <remap from="grid_map"  to="/map"/>
+
     </node>
   
     <!-- Visualisation RTAB-Map -->
