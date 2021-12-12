@@ -14,25 +14,25 @@ obstacle_layer:
   max_obstacle_height: 0.4
   track_unknown_space: true
 
-observation_sources: point_cloud_sensorA point_cloud_sensorB
+  observation_sources: point_cloud_sensorA #point_cloud_sensorB
 
-point_cloud_sensorA: {
+  point_cloud_sensorA: {
     sensor_frame: base_footprint,
     data_type: PointCloud2,
-    topic: obstacles_cloud,
+    topic: /d435i/depth/color/points,
     expected_update_rate: 0.5,
     marking: true,
     clearing: true,
     min_obstacle_height: 0.04
   }
 
-point_cloud_sensorB: {
-    sensor_frame: base_footprint,
-    data_type: PointCloud2,
-    topic: ground_cloud,
-    expected_update_rate: 0.5,
-    marking: false,
-    clearing: true,
-    min_obstacle_height: -1.0 # make sure the ground is not filtered
-  }
+  # point_cloud_sensorB: {
+  #   sensor_frame: base_footprint,
+  #   data_type: PointCloud2,
+  #   topic: ground_cloud,
+  #   expected_update_rate: 0.5,
+  #   marking: false,
+  #   clearing: true,
+  #   min_obstacle_height: -1.0 # make sure the ground is not filtered
+  # }
 
