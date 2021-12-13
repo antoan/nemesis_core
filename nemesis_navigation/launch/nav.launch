@@ -57,7 +57,8 @@
      <remap from="move_base_simple/goal" to="/planner_goal"/>
      <node pkg="move_base" type="move_base" respawn="true" name="move_base" output="screen">
         <param name="base_global_planner" value="navfn/NavfnROS"/>
-    	<rosparam file="$(find nemesis_navigation)/config/costmap_common.yaml" command="load" ns="global_costmap"/>
+        <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
+        <rosparam file="$(find nemesis_navigation)/config/costmap_common.yaml" command="load" ns="global_costmap"/>
      	<rosparam file="$(find nemesis_navigation)/config/costmap_common.yaml" command="load" ns="local_costmap" />
     	<rosparam file="$(find nemesis_navigation)/config/costmap_local.yaml" command="load" ns="local_costmap" />
     	<rosparam file="$(find nemesis_navigation)/config/costmap_global.yaml" command="load" ns="global_costmap"/>
