@@ -31,7 +31,7 @@
     </include>
 
 <include file="$(find nemesis_navigation)/launch/rtabmap.launch">
-            <arg name="rtabmap_args"       value="--Mem/UseOdomGravity true --Optimizer/GravitySigma 0.3 --Optimizer/Strategy 2 --Optimizer/Robust true --RGBD/OptimizeMaxError 0 --Reg/Force3DoF true --Optimizer/Slam2D true"/>
+            <arg name="rtabmap_args"       value="$(arg rtabmap_args) --Mem/UseOdomGravity true --Optimizer/GravitySigma 0.3 --Optimizer/Strategy 2 --Optimizer/Robust true --RGBD/OptimizeMaxError 0 RGBD/GoalReachedRadius 0.1 --Reg/Force3DoF true --Optimizer/Slam2D true"/>
             <arg name="depth_topic"        value="/$(arg camera2)/aligned_depth_to_color/image_raw"/>
             <arg name="frame_id"           value="base_footprint"/>
             <arg name="rgbd_sync"          value="true"/>
