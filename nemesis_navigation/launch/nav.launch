@@ -17,7 +17,7 @@
 
 
 
-    <include file="$(find nemesis_description)/launch/description.launch"/>
+ <!--  Assume description is already set.  <include file="$(find nemesis_description)/launch/description.launch"/> -->
 
      <include file="$(find nemesis_navigation)/launch/rs_t265_and_d435i.launch">
             <arg name="device_type_camera1"             value="$(arg device_type_camera1)"/>
@@ -57,7 +57,7 @@
      <remap from="move_base_simple/goal" to="/planner_goal"/>
      <node pkg="move_base" type="move_base" respawn="true" name="move_base" output="screen">
         <param name="base_global_planner" value="navfn/NavfnROS"/>
-        <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
+        <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" /> .
         <rosparam file="$(find nemesis_navigation)/config/costmap_common.yaml" command="load" ns="global_costmap"/>
      	<rosparam file="$(find nemesis_navigation)/config/costmap_common.yaml" command="load" ns="local_costmap" />
     	<rosparam file="$(find nemesis_navigation)/config/costmap_local.yaml" command="load" ns="local_costmap" />
