@@ -1,7 +1,7 @@
-footprint: [[ 0.3,  0.3], [-0.3,  0.3], [-0.3, -0.3], [ 0.3, -0.3]]
-footprint_padding: 0.04
+footprint: [[ 0.1675, 0.1175], [ 0.1675, 0.1175], [ 0.1675, 0.1175], [ 0.1675, 0.1175]] 
+footprint_padding: 0.02
 inflation_layer:
-  inflation_radius: 0.7 # 2xfootprint, it helps to keep the global planned path farther from obstacles
+  inflation_radius: 0.2346  # 2xfootprint, it helps to keep the global planned path farther from obstacles
 transform_tolerance: 2
 
 static:
