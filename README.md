@@ -10,12 +10,12 @@ Lauch files for Intel D435i depth and T256 Visual Intertial tracking cameras use
 
 <p align="center">
   <img src="/docs/images/20220204_164520.jpg" width="200">
-  <img src="/docs/images/DSC_0023.jpg" width="200">
-  <img src="/docs/images/DSC_0024.jpg" width="200">
-  <img src="/docs/images/DSC_0026.jpg" width="200">
-  <img src="/docs/images/IMG_20210909_154740524.jpg" width="200">
-  <img src="/docs/images/IMG_20210814_193007750.jpg" width="200">
-  <img src="/docs/images/IMG_20211023_150932701_HDR.jpg" width="200">
+  <img src="/docs/images/2021-11-09 23-06-32.jpg width="200">
+  <img src="/docs/images/2021-12-06 14-20-24.jpg" width="200">
+  <img src="/docs/images/2021-12-11 01-37-28.jpg" width="200">
+  <img src="/docs/images/2021-12-11 21-59-10.jpg" width="200">
+  <img src="/docs/images/2021-12-14 21-38-54.jpg" width="200">
+  <img src="/docs/images/2021-12-14 22-58-22.jpg" width="200">
 </p>
 
 - nemesis_navigation : perception & navigation.
