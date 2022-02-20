@@ -10,7 +10,7 @@ Lauch files for Intel D435i depth and T256 Visual Intertial tracking cameras use
 
 <p align="center">
   <img src="/docs/images/20220204_164520.jpg" width="200">
-  <img src="/docs/images/2021-11-09 23-06-32.jpg width="200">
+  <img src="/docs/images/2021-11-09 23-06-32.jpg" width="200">
   <img src="/docs/images/2021-12-06 14-20-24.jpg" width="200">
   <img src="/docs/images/2021-12-11 01-37-28.jpg" width="200">
   <img src="/docs/images/2021-12-11 21-59-10.jpg" width="200">
