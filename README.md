@@ -1,19 +1,12 @@
-nemesis
-=====
+# nemesis_core
 
-Forked from: https://github.com/husky/husky/tree/kinetic-devel commit [2d368cf32530401238cb45f31e54f40080dd6dc1](https://github.com/husky/husky/commit/2d368cf32530401238cb45f31e54f40080dd6dc1)
+![Mapping Session](/docs/images/nemesis_mapping.gif)
 
-This project is an adaptation of the [Husky ROS stack from Clearpath Robotics](http://wiki.ros.org/Robots/Husky), to integrate and control the [PiBorg Monsterborg robot platform](https://www.piborg.org/robots-1/monsterborg) with ROS.
+This repository is part of Nemesis Robot. A high level overview of this project can be found in this post https://antoan.github.io/Nemesis/
 
-It provides a ROS RobotHW interface implementation using a cythonized version of the original python [ThunderBorg](https://www.piborg.org/motor-control-1135/thunderborg) motor controller driver from PiBorg, for the purpose of reducing performance overhead in the main ROS control loop.
+It covers primarily the perception, simultaneous navigation and navigation components of the Nemesis Robot stack, with some very early  stage autonomous navigation support, on ROS Melodic. 
 
- - nemesis_control : Control configuration
- - nemesis_description : Robot description (URDF)
- - nemesis_msgs : Message definitions
- - nemesis_viz : Visualization (rviz) configuration and bringup
-
-
-
+Lauch files for Intel D435i depth and T256 Visual Intertial tracking cameras used for the project can be found in nemesis_navigation package. rtabmap_ros is used for mapping with odometry input from the T265. Librealsense, the underlying sensors driver is setup via the Realsense distribution install method.
 
 
 
