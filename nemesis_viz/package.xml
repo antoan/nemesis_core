@@ -4,10 +4,11 @@
   <version>0.0.1</version>
   <description>Visualization configuration for nemesis</description>
 
-  <author email="rgariepy@clearpathrobotics.com">Ryan Gariepy</author>
+  <author email="antoan.bekele@gmail.com">Ryan Gariepy</author>
+ <author email="rgariepy@clearpathrobotics.com">Ryan Gariepy</author>
   <author email="mpurvis@clearpathrobotics.com">Mike Purvis</author>
 
-  <maintainer email="tbaltovski@clearpathrobotics.com">Tony Baltovski</maintainer>
+  <maintainer email="tbaltovski@clearpathrobotics.com">Tony Baltovski</maintainer> 
 
   <license>BSD</license>
 

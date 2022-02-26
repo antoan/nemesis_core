@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <package>
+
   <name>nemesis_navigation</name>
   <version>0.1.0</version>
   <description>Autonomous mapping and navigation scearios for Nemesis</description>
@@ -16,6 +17,9 @@
   <run_depend>navfn</run_depend>
   <run_depend>base_local_planner</run_depend>
   <run_depend>dwa_local_planner</run_depend>
+  <run_depend>realsense2_camera</run_depend>
+  <run_depend>realsense2_description</run_depend>
+  <run_depend>rtabmap_ros</run_depend>
 
   <export>
   </export>
