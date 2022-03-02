@@ -4,7 +4,7 @@
 
 This repository is part of Nemesis Robot. A high level overview of this project can be found in this post https://antoan.github.io/Nemesis/
 
-It covers the perception, simultaneous navigation and navigation components of the Nemesis Robot stack, with some very early  stage autonomous navigation support with `move_base`, on ROS Melodic. 
+It covers the perception, simultaneous localization and mapping, and navigation components of the Nemesis Robot stack, with some very early  stage autonomous navigation support with `move_base`, on ROS Melodic. 
 
 <img src="/docs/images/20220204_164520.jpg" width="300">
 
