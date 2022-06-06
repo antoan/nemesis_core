@@ -31,7 +31,20 @@
     </include>
 
 <include file="$(find nemesis_navigation)/launch/rtabmap.launch">
-            <arg name="rtabmap_args"       value="$(arg rtabmap_args) --Mem/UseOdomGravity true --Optimizer/GravitySigma 0.3 --Optimizer/Strategy 2 --Optimizer/Robust true --RGBD/OptimizeMaxError 0 RGBD/GoalReachedRadius 0.1 --Reg/Force3DoF true --Optimizer/Slam2D true"/>
+
+            <arg name="rtabmap_args"       value="$(arg rtabmap_args)
+            --Mem/UseOdomGravity true
+            --Optimizer/GravitySigma 0.3
+            --Optimizer/Strategy 2
+            --Optimizer/Robust true
+            --RGBD/OptimizeMaxError 0
+            --Reg/Force3DoF true
+            --Optimizer/Slam2D true"/>
+            --RGBD/GoalReachedRadius 0.1
+            --RGBD/MarkerDetection true
+            --Marker/Dictionary 20
+            --Marker/Length 0.162"/>
+
             <arg name="depth_topic"        value="/$(arg camera2)/aligned_depth_to_color/image_raw"/>
             <arg name="frame_id"           value="base_footprint"/>
             <arg name="rgbd_sync"          value="true"/>
@@ -54,7 +67,9 @@
      <remap from="obstacles_cloud" to="/obstacles_cloud"/>
      <remap from="ground_cloud" to="/ground_cloud"/>
      <remap from="map" to="/map"/>
+
      <remap from="move_base_simple/goal" to="/planner_goal"/>
+
      <node pkg="move_base" type="move_base" respawn="true" name="move_base" output="screen">
         <param name="base_global_planner" value="navfn/NavfnROS"/>
         <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
