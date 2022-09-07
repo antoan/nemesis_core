@@ -21,6 +21,10 @@
             <arg name="clip_distance"                   value="$(arg clip_distance)"/>
             
     </include>
+    
+    <rosparam>
+            /t265/tracking_module/enable_relocalization: false
+    </rosparam>
 
     <include file="$(find nemesis_navigation)/launch/rtabmap.launch">
 
@@ -31,7 +35,6 @@
             --Optimizer/Robust true
             --RGBD/OptimizeMaxError 0
             --Reg/Force3DoF true
-            --Optimizer/Slam2D true
             --RGBD/MarkerDetection true
             --Marker/Dictionary 20
             --Marker/Length 0.162"/>
